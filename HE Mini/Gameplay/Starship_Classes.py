@@ -278,12 +278,9 @@ STARSHIP_CLASSES: Dict[str, Type[StarshipClass]] = {
     "lancer": Lancer,
 }
 
-
 class Starship_Classes(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
-
-
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(Starship_Classes(bot))
