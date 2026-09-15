@@ -22,6 +22,11 @@ class PageView(discord.ui.View):
         embed = self.get_embed()
         await interaction.response.edit_message(embed=embed, view=self)
 
+    async def delete_after_spawn(self):
+        """Remove the instance information message once the player spawns."""
+        if self.message is not None:
+            await self.message.delete()
+
     def get_embed(self) -> discord.Embed:
         pages = {
             "home": (
@@ -88,16 +93,30 @@ class PageView(discord.ui.View):
     ):
         await self.show_page(interaction, "access")
 
+    @discord.ui.button(label="Spawn", style=discord.ButtonStyle.success, row=1)
+    async def spawn_button(
+        self, interaction: discord.Interaction, button: discord.ui.Button
+    ):
+        
+        await interaction.response.defer()
+        await self.delete_after_spawn()
+
 
 class Visual_Interface(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    @commands.command(name="pages")
-    async def pages(self, ctx: commands.Context):
-        """Send the interactive multi-page message."""
-        view = PageView(ctx.author.id)
-        await ctx.send(embed=view.get_embed(), view=view)
+    async def send_instance_page(
+        self, destination: discord.abc.Messageable, author_id: int
+    ) -> PageView:
+        """Send the instance page when an instance is created.
+
+        Call ``view.delete_after_spawn()`` after spawning if spawning is
+        handled outside the Spawn button callback.
+        """
+        view = PageView(author_id)
+        view.message = await destination.send(embed=view.get_embed(), view=view)
+        return view
 
 
 
