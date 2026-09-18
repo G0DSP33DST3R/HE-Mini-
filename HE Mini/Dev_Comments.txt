@@ -1,0 +1,13 @@
+Currently Working on Starship Logic. IE.
+What is a starship Made of?
+    the different types of starships?
+    what can a starship do?
+    A starship isnt individually controlled unless you only own one, in the fleet.
+        Actions such as mining and other tasks, require you to split your fleet. Send one Ship over to one roid, and you can send another to another.
+
+How does one do... that? 
+    The first step in solving that problem would be the hardpoint. here's where we're gonna use probes.
+
+Majority of the stuff included in this update of the bot is just me trying to finish the part register and get things functioning in python as
+definitively as i can, because while python is the easiest langauge to do this project in, just like all other coding languages.
+mistakes are not forgiven.
